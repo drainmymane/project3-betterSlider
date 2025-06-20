@@ -84,6 +84,7 @@ function swipeDetect(el){
                 handleFromRightToLeft();
             }
         }
+        event.preventDefault();
     });
     
     surface.addEventListener('touchmove', function(event){
@@ -91,5 +92,5 @@ function swipeDetect(el){
     })
 }
 
-let el = document.querySelector('.slider-image-wrapper');
+let el = document.querySelector('.slider');
 swipeDetect(el);
