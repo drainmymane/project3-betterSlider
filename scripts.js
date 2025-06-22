@@ -61,6 +61,27 @@ const handleFromRightToLeft = () =>{
     }
 }
 
+const handleListClick = (event) => {
+    if (isEnabled){
+        if (event.target.tagName === 'LI' && !event.target.classList.contains('current')) {
+            isEnabled=false;
+            document.querySelector('.current').classList.remove('current');
+            event.target.classList.add('current');
+            while(!items[currentItem].classList.contains('current')){
+                nextItem(currentItem);
+            }
+            images[currentItem].classList.add('fade-in');
+            images[currentItem].addEventListener('animationend', function (){
+                images[currentItem].classList.remove('fade-in');
+                refreshItems();
+                isEnabled=true;
+            });
+            refreshPageCount();
+        }
+    }
+}
+
+document.querySelector('.page-list').addEventListener('click', handleListClick);
 document.querySelector('.right-arrow').addEventListener('click', handleFromRightToLeft);
 document.querySelector('.left-arrow').addEventListener('click', handleFromLeftToRight);
 document.body.addEventListener('mouse', refreshPageCount);
